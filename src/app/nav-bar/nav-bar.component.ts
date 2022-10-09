@@ -10,7 +10,7 @@ import { NotificationService } from '../service/notification.service';
   styleUrls: ['./nav-bar.component.css'],
 })
 export class NavBarComponent implements OnInit {
-  public authenticated: boolean = true;
+  public authenticated: boolean = false;
 
   constructor(
     private auth: Auth,
@@ -28,6 +28,7 @@ export class NavBarComponent implements OnInit {
     localStorage.removeItem('token');
     localStorage.removeItem('roomNumber');
     localStorage.removeItem('isAuthenticate');
+    this.authenticated = false;
     this.notificationService.notify(
       NotificationType.SUCCESS,
       'You are sucess loged out'
