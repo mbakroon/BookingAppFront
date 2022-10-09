@@ -1,0 +1,35 @@
+<!-- 
+<div class="card d-flex justify-content-center p-5 mb-4 bg-light rounded-3" >
+  <div class="container py-5">
+    <h1>Raumverwaltung & Raumbuchungen</h1>
+    <p class="lead">Vereinfacter Buchungsprozess durch Online-Buchungsanfragen</p>
+    <div *ngIf="authenticated; then welcomeUser else signInPrompt"></div>
+    <ng-template #welcomeUser>
+      <h4>Welcome {{ loadedRoom != null ? loadedRoom.roomName : '' }}!</h4>
+      <p>Um ein Raum zu buchen, klicken Sie auf "Buchen" </p>
+      <a class="btn btn-dark btn-sm mb-3" routerLink="/neuappointment">Raum buchen</a>
+    </ng-template>
+    <ng-template #signInPrompt>
+      <button class="btn btn-primary btn-large" role="button" routerLink="/login">Click here to sign in</button>
+    </ng-template>
+  </div>
+</div> -->
+
+<div class="d-flex justify-content-center" style="margin-top: 10%;">
+  <div class="card text-center "  style="width: 70%;">
+    <div class="card-header">
+      <h3>Welcome to room {{loadedRoom !=null? loadedRoom.roomName : ''}}!</h3>
+    </div>
+    <div class="card-body">
+      <h5 class="card-title" *ngIf="!isReserved">The Room is frei to book</h5>
+      <h5 class="card-title" *ngIf="isReserved">The Room is Reserved now</h5>
+
+      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+      <a class="btn btn-primary" *ngIf="!isReserved" routerLink="/neuappointment">Book Appointment</a>
+    </div>
+    <div class="card-footer text-muted">
+      Raumverwaltung Application
+    </div>
+  </div>
+</div>
+
