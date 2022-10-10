@@ -21,15 +21,15 @@ export class HomeComponent implements OnInit, OnDestroy {
   public isReserved: Boolean = false;
   public appointments: Appointment[] = [];
   public minute: number = 50;
+  
 
   ngOnInit(): void {
     const roomNumber = localStorage.getItem('roomNumber') as string;
-    this.authenticated = Boolean(localStorage.getItem("isAuthenticate") );
-    this.sub.push(this.roomService
-      .getRoomByRoomNumber(roomNumber)
-      .subscribe((response) => {
-        this.loadedRoom = response;
-      }));
+    // this.sub.push(this.roomService
+    //   .getRoomByRoomNumber(roomNumber)
+    //   .subscribe((response) => {
+    //     this.loadedRoom = response;
+    //   }));
 
       setInterval(()=>{
         this.checkAppointmentAvailability();
@@ -44,12 +44,12 @@ export class HomeComponent implements OnInit, OnDestroy {
     // let currentDate = new Date().toLocaleTimeString().slice(0,5);
     let currentDate = new Date().getTime();
 
-    this.roomService.getAllAppointments("111").subscribe(
+    this.roomService.getAllAppointments(roomNumber).subscribe(
       (response: Appointment[])=>{
         this.appointments = response;
       }
     )
-    console.log(currentDate);
+    // console.log(currentDate);
     this.appointments.forEach(appointment => {
       const startTime =this.convertStringToTime(appointment.startTime);
       const endTime = this.convertStringToTime(appointment.endTime);

@@ -33,22 +33,21 @@ export class LoginComponent implements OnInit {
 
 
   login(roomNumber: string){
-    localStorage.setItem('roomNumber',this.roomService.roomNumber );
-    localStorage.setItem('token',"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6InJvb20iLCJpYXQiOjE1MTYyMzkwMjJ9.09l3IQzhIMkaDuFnA76ULitS2ihFeKDNb6_wQJNlGJU")
-    localStorage.setItem('roomNumber',roomNumber);
-    localStorage.setItem('isAuthenticate','true');
+   
     this.roomService.getRoomByRoomNumber(roomNumber).subscribe((response: Room) =>{
+      if(response != null){
+        this.auth.authenticated = true;
+        localStorage.setItem('token',"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6InJvb20iLCJpYXQiOjE1MTYyMzkwMjJ9.09l3IQzhIMkaDuFnA76ULitS2ihFeKDNb6_wQJNlGJU")
+        localStorage.setItem('roomNumber',roomNumber);
         this.notificationService.sendNotification(NotificationType.SUCCESS,`Login Success`);
         this.router.navigateByUrl('/home');
+      }      
     },
     (errorResponse: HttpErrorResponse)=>{
       this.notificationService.notify(
         NotificationType.ERROR,
         errorResponse.error.message
       )
-    });
-     
+    });  
   }
-
-  
 }

@@ -12,8 +12,8 @@ const routes: Routes = [
   {path: 'navbar', component: NavBarComponent},
   {path: 'login', component: LoginComponent},
   {path: 'home', component: HomeComponent, canActivate:[AuthGuard]},
-  {path: 'calendar', component: CalendarComponent},
-  {path: 'neuappointment', component: NeuAppointmentComponent},
+  {path: 'calendar', component: CalendarComponent , canActivate:[AuthGuard]},
+  {path: 'neuappointment', component: NeuAppointmentComponent, canActivate:[AuthGuard]},
  
 ];
 

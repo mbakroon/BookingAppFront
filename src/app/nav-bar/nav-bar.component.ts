@@ -10,29 +10,29 @@ import { NotificationService } from '../service/notification.service';
   styleUrls: ['./nav-bar.component.css'],
 })
 export class NavBarComponent implements OnInit {
-  public authenticated: boolean = false;
+  public authenticated!: boolean ;
 
   constructor(
     private auth: Auth,
-    private notificationService: NotificationService,
     private router: Router
   ) {}
 
   ngOnInit(): void {
-    this.authenticated = Boolean(localStorage.getItem("isAuthenticate"));
-    console.log(this.authenticated);
+    
   }
 
+  ngAfterContentChecked(): void {
+    this.authenticated = this.auth.authenticated;
+  }
 
-  signOut() {
-    localStorage.removeItem('token');
-    localStorage.removeItem('roomNumber');
-    localStorage.removeItem('isAuthenticate');
+  signOut(){
     this.authenticated = false;
-    this.notificationService.notify(
-      NotificationType.SUCCESS,
-      'You are sucess loged out'
-    );
-      this.router.navigateByUrl('/login')
+    this.auth.signOut();
   }
+
+  signIn(){
+    this.router.navigateByUrl("/login");
+  }
+
+
 }
