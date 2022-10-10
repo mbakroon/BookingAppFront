@@ -10,7 +10,7 @@ import { NotificationService } from '../service/notification.service';
   styleUrls: ['./nav-bar.component.css'],
 })
 export class NavBarComponent implements OnInit {
-  public authenticated!: boolean ;
+  public authenticated: boolean = false ;
 
   constructor(
     private auth: Auth,
@@ -18,11 +18,15 @@ export class NavBarComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    
+    //this.authenticated = this.auth.authenticated;
+    this.authenticated = this.auth.IsLoggedIn();
+
   }
 
   ngAfterContentChecked(): void {
-    this.authenticated = this.auth.authenticated;
+    //this.authenticated = this.auth.authenticated;
+    this.authenticated = this.auth.IsLoggedIn();
+
   }
 
   signOut(){
